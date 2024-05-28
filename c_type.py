@@ -23,11 +23,11 @@ while True:
         print(user_name)
         print(project_name)
 
-        if not os.path.exists(project_name):
-            repo = git.Repo.clone_from(f"https://github.com/{user_name}/{project_name}.git",project_name)
+        if not os.path.exists(f'./cloned_project/{project_name}'):
+            repo = git.Repo.clone_from(f"https://github.com/{user_name}/{project_name}.git",f"/Users/森壮平/Desktop/gitpyiter/cloned_project/{project_name}")
 
         else :
-            repo = git.Repo(project_name)
+            repo = git.Repo(f"cloned_project/{project_name}")
             data = []
 
             for item in repo.iter_commits(max_count = 1000):
@@ -41,7 +41,7 @@ while True:
                                 data.append({'commit_name': diff.a_path, 'date': dt, 'change_type': diff.change_type, 'hash': item.hexsha})
                                 #print(diff.a_path)
                                 #print(dt)
-                                #print(diff.change_type)
+                                print(diff.change_type)
 
             json_data = json.dumps(data)
             #print(json_data)
